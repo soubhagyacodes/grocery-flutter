@@ -16,7 +16,6 @@ class Profile extends StatelessWidget {
           ),
          floatingActionButton: IconButton(
             onPressed:() {
-              Navigator.pop(context);
             }, 
             tooltip:'Back', 
             icon: Icon(Icons.arrow_back)

@@ -38,6 +38,8 @@ class _BaseState extends State<Base> {
         currentIndex: _currentIndex,
         selectedItemColor: Colors.green,
         type: BottomNavigationBarType.fixed,
+        iconSize: 26,
+        elevation: 10,
 
         onTap: (int index) {
           setState(() {
@@ -46,7 +48,6 @@ class _BaseState extends State<Base> {
         },
 
         items: [
-
           BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(Icons.home_outlined),
