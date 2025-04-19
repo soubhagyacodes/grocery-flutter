@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 
-
-class Profile extends StatelessWidget {
+class Home extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-            title: Text("Profile"),
+            title: Text("Home"),
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
           ),
           body: ListView(
 
           ),
-         floatingActionButton: IconButton(
+   
+          floatingActionButton: IconButton(
             onPressed:() {
               Navigator.pop(context);
             }, 

@@ -2,102 +2,77 @@ import 'package:flutter/material.dart';
 import 'cart.dart';
 import 'categories.dart';
 import 'profile.dart';
+import 'home.dart';
 
 void main() {
   runApp(
     MaterialApp(
       title: 'Grocery App',
       debugShowCheckedModeBanner: false,
-      home: Home()
-      )
-    );
+      home: Base(),
+    ),
+  );
 }
 
-class Home extends StatelessWidget {
+class Base extends StatefulWidget {
+  @override
+  _BaseState createState() => _BaseState();
+}
+
+class _BaseState extends State<Base> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    Home(),
+    Categories(),
+    Cart(),
+    Profile(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: Text("Grocery"),
-            backgroundColor: Colors.white,
-            automaticallyImplyLeading: false,
-          ),
-          body: ListView(
 
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.green,
+        type: BottomNavigationBarType.fixed,
+
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+
+        items: [
+
+          BottomNavigationBarItem(
+            label: 'Home',
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: 0,
-            selectedItemColor: Colors.green,
-            type: BottomNavigationBarType.fixed,
-            items: [
-              BottomNavigationBarItem(
-                label: 'Home',
-                icon: IconButton(
-                  tooltip: 'Home',
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                  },
-                  icon: Icon(Icons.home),
-                ),
-                activeIcon: IconButton(
-                  tooltip: 'Home',
-                  onPressed: () {},
-                  icon: Icon(Icons.home),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'Categories',
-                icon: IconButton(
-                  tooltip: 'Categories',
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Categories()));
-                  },
-                  icon: Icon(Icons.category_outlined),
-                ),
-                activeIcon: IconButton(
-                  tooltip: 'Categories',
-                  onPressed: () {},
-                  icon: Icon(Icons.category_rounded),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'Cart',
-                icon: IconButton(
-                  tooltip: 'Cart',
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Cart()));
-                  },
-                  icon: Icon(Icons.shopping_cart_outlined),
-                ),
-                activeIcon: IconButton(
-                  tooltip: 'Cart',
-                  onPressed: () {},
-                  icon: Icon(Icons.shopping_cart_rounded),
-                ),
-              ),
-              BottomNavigationBarItem(
-                label: 'Profile',
-                icon: IconButton(
-                  tooltip: 'Profile',
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
-                  },
-                  icon: Icon(Icons.person_outline),
-                ),
-                activeIcon: IconButton(
-                  tooltip: 'Profile',
-                  onPressed: () {},
-                  icon: Icon(Icons.person),
-                ),
-              ),
-            ],
+
+          BottomNavigationBarItem(
+            label: 'Categories',
+            icon: Icon(Icons.category_outlined),
+            activeIcon: Icon(Icons.category_rounded),
           ),
-          floatingActionButton: IconButton(
-            onPressed:() {
-            }, 
-            tooltip:'Back', 
-            icon: Icon(Icons.arrow_back)
-            ),
-          );
+
+          BottomNavigationBarItem(
+            label: 'Cart',
+            icon: Icon(Icons.shopping_cart_outlined),
+            activeIcon: Icon(Icons.shopping_cart_rounded),
+          ),
+
+          BottomNavigationBarItem(
+            label: 'Profile',
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+          ),
+
+        ],
+      ),
+    );
   }
 }
