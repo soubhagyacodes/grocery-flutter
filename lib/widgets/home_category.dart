@@ -33,7 +33,7 @@ class HomeCategory extends StatelessWidget {
             category["text"],
             style: GoogleFonts.poppins(
               fontSize: 12,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

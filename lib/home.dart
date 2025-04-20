@@ -6,6 +6,29 @@ import 'styles.dart';
 import 'package:grocery_app/widgets/home_category.dart';
 import 'package:grocery_app/widgets/discount_box.dart';
 
+final bubbleData = [
+  {
+    "icon": Icons.location_on_outlined,
+    "text": "Pickup"
+  },
+  {
+    "icon": Icons.train_outlined,
+    "text": "Delivery"
+  },
+  {
+    "icon": Icons.local_offer_outlined,
+    "text": "Deals"
+  },
+  {
+    "icon": Icons.rate_review_outlined,
+    "text": "Ratings"
+  },
+  {
+    "icon": Icons.store_mall_directory_outlined,
+    "text": "Stores"
+  },
+];
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -120,6 +143,18 @@ class Home extends StatelessWidget {
                   discounts.map((onediscount) => DiscountBox(discount: onediscount)).toList()
               ),
             ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(15, 15, 10, 0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                spacing: 8,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: bubbleData.map((singlebubble) => bubble(singlebubble)).toList()
+              ),
+            ),
           )
         ],
       ),
@@ -130,4 +165,28 @@ class Home extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget bubble(Map<String, dynamic> data) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 10),
+    height: 35,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: Colors.grey.shade400),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      spacing: 1,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(data["icon"], size: 18),
+        Text(
+          data["text"],
+          style: GoogleFonts.poppins(fontSize: 11, fontWeight: FontWeight.w600),
+        ),
+      ],
+    ),
+  );
 }
