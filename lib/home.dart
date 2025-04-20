@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/utils/home_categories.dart';
+import 'package:grocery_app/utils/discounts.dart';
 import 'styles.dart';
 import 'package:grocery_app/widgets/home_category.dart';
+import 'package:grocery_app/widgets/discount_box.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -108,6 +110,17 @@ class Home extends StatelessWidget {
                 ),
             ),
           ),
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                spacing: 10,
+                children: 
+                  discounts.map((onediscount) => DiscountBox(discount: onediscount)).toList()
+              ),
+            ),
+          )
         ],
       ),
       floatingActionButton: IconButton(
