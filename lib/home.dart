@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/utils/home_categories.dart';
 import 'package:grocery_app/utils/discounts.dart';
+import 'package:grocery_app/utils/main_home_data.dart';
 import 'styles.dart';
 import 'package:grocery_app/widgets/home_category.dart';
 import 'package:grocery_app/widgets/discount_box.dart';
+import 'package:grocery_app/widgets/product_boxes.dart';
 
 final bubbleData = [
   {
@@ -155,7 +157,10 @@ class Home extends StatelessWidget {
                 children: bubbleData.map((singlebubble) => bubble(singlebubble)).toList()
               ),
             ),
-          )
+          ),
+          ProductBoxes(products: fruits, title: "Fresh Fruits",),
+          ProductBoxes(products: groceries, title: "Groceries",),
+          ProductBoxes(products: snacks, title: "Healthy Snacks",)
         ],
       ),
       floatingActionButton: IconButton(
