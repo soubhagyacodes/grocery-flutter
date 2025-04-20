@@ -15,6 +15,8 @@ void main() {
 }
 
 class Base extends StatefulWidget {
+  const Base({super.key});
+
   @override
   _BaseState createState() => _BaseState();
 }

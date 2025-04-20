@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/utils/home_categories.dart';
 import 'styles.dart';
+import 'package:grocery_app/widgets/home_category.dart';
 
 class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,9 +40,11 @@ class Home extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: ListView(
+        scrollDirection: Axis.vertical,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(7),
+          Container(
+            padding: const EdgeInsets.all(0),
+            margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
             child: Row(
               spacing: 5,
               children: [
@@ -80,14 +87,29 @@ class Home extends StatelessWidget {
                       color: Colors.grey.shade200, // Background color
                       borderRadius: BorderRadius.all(Radius.circular(30)), // Rounded corners
                     ),
-                  child: Icon(Icons.filter_list, color: Colors.grey, size: 20,),
+                  child: Icon(Icons.filter_list, color: Colors.black54, size: 20,),
                 )
               ],
             ),
           ),
+          Container(
+            padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+            margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+            height: 85,
+            decoration: BoxDecoration(
+              color: Colors.white
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                  spacing: 18,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: homeCategories.map((singlecategory) => HomeCategory(category: singlecategory)).toList()
+                ),
+            ),
+          ),
         ],
       ),
-
       floatingActionButton: IconButton(
         onPressed: () {},
         tooltip: 'Back',
