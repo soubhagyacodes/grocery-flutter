@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../home.dart';
 
 class ProductBoxes extends StatelessWidget{
   final List<Map<String, dynamic>> products;
@@ -31,7 +32,7 @@ class ProductBoxes extends StatelessWidget{
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       spacing: 10,
-                      children: products.map((productdata)=> productBox(productdata)).toList(),
+                      children: products.map((productdata)=> productBox(productdata, context)).toList(),
                     ),
                   ),
                 )
@@ -41,40 +42,53 @@ class ProductBoxes extends StatelessWidget{
   }
 }
 
-Widget productBox(Map<String, dynamic> product) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Image.asset(product["image"], height: 130, width: 150,),
-      SizedBox(height: 20),
-      Text(
-        product["price"],
-        style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
-      ),
-      Text(
-        product["name"],
-        style: GoogleFonts.poppins(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: Colors.grey,
+Widget productBox(Map<String, dynamic> product,BuildContext context) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProductDetails(product: product),
         ),
-      ),
-      SizedBox(height: 3),
-      Row(
-        spacing: 4,
+      );
+    },
+    child: Padding(
+      padding: const EdgeInsets.all(3),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.verified, size: 14, color: Colors.green),
+          Image.asset(product["image"], height: 130, width: 150,),
+          SizedBox(height: 20),
           Text(
-            "${product["stock"]}+ in Stock",
+            product["price"],
+            style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          Text(
+            product["name"],
             style: GoogleFonts.poppins(
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
-              color: Colors.green,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
             ),
+          ),
+          SizedBox(height: 3),
+          Row(
+            spacing: 4,
+            children: [
+              Icon(Icons.verified, size: 14, color: Colors.green),
+              Text(
+                "${product["stock"]}+ in Stock",
+                style: GoogleFonts.poppins(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.green,
+                ),
+              ),
+            ],
           ),
         ],
       ),
-    ],
+    ),
   );
 }

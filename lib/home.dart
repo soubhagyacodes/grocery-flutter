@@ -172,6 +172,132 @@ class Home extends StatelessWidget {
   }
 }
 
+class ProductDetails extends StatefulWidget{
+  final Map<String, dynamic> product;
+  const ProductDetails({super.key, required this.product});
+
+  @override
+  State<ProductDetails> createState() => _ProductDetails();
+}
+
+class _ProductDetails extends State<ProductDetails>{
+  int counter = 0;
+
+  @override
+  Widget build(BuildContext context){
+    
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.chevron_left_outlined), onPressed: (){Navigator.pop(context);},),
+        centerTitle: true,
+        title: Text("Details", style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),),
+        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart_outlined))],
+        actionsPadding: EdgeInsets.all(10),
+      ),
+      body: ListView(
+        children: [Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Image.asset(
+                      widget.product["image"], 
+                      height: 250, 
+                    )
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(25, 25, 25, 10),
+                child: Column(
+                  spacing: 7,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        spacing: 8,
+                        children: [
+                          Text(
+                            widget.product["name"], 
+                            style: GoogleFonts.poppins(fontSize: 30, fontWeight: FontWeight.w400)
+                          ),
+                          Icon(Icons.verified, color: Colors.green,)
+                        ],
+                      ),
+                      Row(
+                          spacing: 10,
+                          children: [
+                            Icon(Icons.favorite_outline_outlined, size: 20),
+                            Icon(Icons.share_outlined, size: 20)
+                          ],
+                        ),
+        
+                  ],),
+                  Text(
+                    widget.product["price"], 
+                    style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w700)
+                  ),
+        
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 12),
+                    child: Column(
+                      spacing: 8,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Description", style: GoogleFonts.poppins(fontSize: 15)),
+                        Text(widget.product["description"],  style: GoogleFonts.poppins(fontSize: 12, color: Colors.grey))
+                      ],
+                      
+                    ),
+                  )
+                  
+                  ],
+                )
+                )
+          ],
+        ),]
+      ),
+      bottomNavigationBar: Material(
+        elevation: 20,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
+          child: Row(
+            spacing: 8,
+            children: [
+                  SizedBox(
+                    height: 80,
+                    child: Row(
+                      spacing: 8,
+                      children: [
+                        IconButton(icon: Icon(Icons.remove), onPressed: (){setState(() {
+                          counter != 0 ? counter--: 0;
+                        });},),
+                        Text(counter.toString(), style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w400)),
+                        IconButton(icon: Icon(Icons.add), onPressed: (){setState(() {
+                          counter++;
+                        });},),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: 20,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.green
+                      ),
+                      child: Center(child: Text("Add to Cart", style: GoogleFonts.poppins(fontWeight: FontWeight.w400, color: Colors.white))),
+                    ),
+                  )
+                ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 Widget bubble(Map<String, dynamic> data) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 10),
