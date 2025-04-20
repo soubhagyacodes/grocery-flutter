@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 
 class Profile extends StatelessWidget {
+  const Profile({super.key});
 
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
@@ -16,7 +19,6 @@ class Profile extends StatelessWidget {
           ),
          floatingActionButton: IconButton(
             onPressed:() {
-              Navigator.pop(context);
             }, 
             tooltip:'Back', 
             icon: Icon(Icons.arrow_back)

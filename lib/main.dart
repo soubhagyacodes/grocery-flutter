@@ -4,6 +4,8 @@ import 'categories.dart';
 import 'profile.dart';
 import 'home.dart';
 
+import 'package:grocery_app/utils/main_home_data.dart';
+
 void main() {
   runApp(
     MaterialApp(
@@ -15,6 +17,8 @@ void main() {
 }
 
 class Base extends StatefulWidget {
+  const Base({super.key});
+
   @override
   _BaseState createState() => _BaseState();
 }
@@ -38,6 +42,8 @@ class _BaseState extends State<Base> {
         currentIndex: _currentIndex,
         selectedItemColor: Colors.green,
         type: BottomNavigationBarType.fixed,
+        iconSize: 26,
+        elevation: 10,
 
         onTap: (int index) {
           setState(() {
@@ -46,7 +52,6 @@ class _BaseState extends State<Base> {
         },
 
         items: [
-
           BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(Icons.home_outlined),
