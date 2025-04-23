@@ -1,4 +1,4 @@
-final categories = ["Fresh", "Dairy & Eggs", "Bakery", "Staples", "Snacks", "Beverages", "Meat", "Personal Care", "Baby", "Health"];
+final categories = ["Vegetables", "Dairy", "Bakery", "Staples", "Snacks", "Beverages", "Meat", "Personal Care", "Baby", "Health"];
 
 final homeCategories = [
   {

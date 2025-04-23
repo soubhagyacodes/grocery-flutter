@@ -64,6 +64,18 @@ flutter:
     - images/fruits/
     - images/groceries/
     - images/snacks/
+    - images/category_icons/
+    - images/category_images/
+    - images/category_images/baby/
+    - images/category_images/bakery/
+    - images/category_images/beverages/
+    - images/category_images/dairy/
+    - images/category_images/health/
+    - images/category_images/meat/
+    - images/category_images/personal_care/
+    - images/category_images/snacks/
+    - images/category_images/staples/
+    - images/category_images/vegetables/
 
   #   - images/a_dot_ham.jpeg
 
