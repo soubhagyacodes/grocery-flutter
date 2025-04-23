@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/utils/home_categories.dart';
 import 'package:grocery_app/utils/discounts.dart';
 import 'package:grocery_app/utils/main_home_data.dart';
+import 'package:grocery_app/utils/cart_items.dart';
 import 'styles.dart';
 import 'package:grocery_app/widgets/home_category.dart';
 import 'package:grocery_app/widgets/discount_box.dart';
@@ -192,7 +193,7 @@ class _ProductDetails extends State<ProductDetails>{
         leading: IconButton(icon: Icon(Icons.chevron_left_outlined), onPressed: (){Navigator.pop(context);},),
         centerTitle: true,
         title: Text("Details", style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),),
-        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart_outlined))],
+        actions: [IconButton(onPressed: (){print(cart);}, icon: Icon(Icons.shopping_cart_outlined))],
         actionsPadding: EdgeInsets.all(10),
       ),
       body: ListView(
@@ -280,14 +281,26 @@ class _ProductDetails extends State<ProductDetails>{
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      width: 20,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.green
+                    child: InkWell(
+                      onTap: () {
+                        if (counter == 0) return;
+                        for (var cartItem in cart) {
+                          if(cartItem["item"] == widget.product["name"]){
+                            cartItem["quantity"] += counter;
+                            return;
+                          }
+                        }
+                        cart.add({"quantity":counter.toString(), "item" : widget.product["name"]});
+                      },
+                      child: Container(
+                        width: 20,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.green
+                        ),
+                        child: Center(child: Text("Add to Cart", style: GoogleFonts.poppins(fontWeight: FontWeight.w400, color: Colors.white))),
                       ),
-                      child: Center(child: Text("Add to Cart", style: GoogleFonts.poppins(fontWeight: FontWeight.w400, color: Colors.white))),
                     ),
                   )
                 ],
