@@ -4,7 +4,6 @@ import 'categories.dart';
 import 'profile.dart';
 import 'home.dart';
 
-import 'package:grocery_app/utils/main_home_data.dart';
 
 void main() {
   runApp(

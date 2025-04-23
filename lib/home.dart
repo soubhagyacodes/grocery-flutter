@@ -290,7 +290,7 @@ class _ProductDetails extends State<ProductDetails>{
                             return;
                           }
                         }
-                        cart.add({"quantity":counter.toString(), "item" : widget.product["name"]});
+                        cart.add({"quantity":counter , "item" : widget.product["name"]});
                       },
                       child: Container(
                         width: 20,
