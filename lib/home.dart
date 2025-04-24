@@ -290,7 +290,7 @@ class _ProductDetails extends State<ProductDetails>{
                             return;
                           }
                         }
-                        cart.add({"quantity":counter , "item" : widget.product["name"]});
+                        cart.add({"quantity":counter , "item" : widget.product["name"], "description" : widget.product["description"], "image": widget.product["image"], "price" : widget.product["price"]});
                       },
                       child: Container(
                         width: 20,

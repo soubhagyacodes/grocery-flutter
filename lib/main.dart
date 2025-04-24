@@ -10,7 +10,7 @@ void main() {
     MaterialApp(
       title: 'Grocery App',
       debugShowCheckedModeBanner: false,
-      home: Categories(),
+      home: Base(),
     ),
   );
 }

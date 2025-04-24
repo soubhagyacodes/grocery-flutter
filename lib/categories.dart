@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_app/utils/category/all_cats.dart';
+import 'package:grocery_app/utils/category/cat_products.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -18,8 +20,11 @@ class Categories extends StatelessWidget {
                   height: 120,
                   decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.elliptical(300,80), bottomRight: Radius.elliptical(300,80))
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.elliptical(300, 80),
+                      bottomRight: Radius.elliptical(300, 80),
                     ),
+                  ),
                 ),
               ),
               Container(
@@ -89,27 +94,58 @@ class Categories extends StatelessWidget {
             ],
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            margin: EdgeInsets.symmetric(horizontal: 12, vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("All Categories", style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 20, 74, 23)),),
-                SizedBox(height: 13,),
-                Row(
-                spacing: 10,
-                children: [
-                Column(
-                  spacing: 8,
-                  children: catData.map((cat) => categorybox(cat["name"], cat["subline"], cat["image"])).take(5).toList(),
+                Text(
+                  "All Categories",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: const Color.fromARGB(255, 20, 74, 23),
+                  ),
                 ),
-                Column(
-                  spacing: 8,
-                  children: catData.sublist(5,10).map((cat) => categorybox(cat["name"], cat["subline"], cat["image"])).take(5).toList(),
-                ),]
-                )
+                SizedBox(height: 13),
+                Row(
+                  spacing: 10,
+                  children: [
+                    Column(
+                      spacing: 8,
+                      children:
+                          catData
+                              .map(
+                                (cat) => categorybox(
+                                  context,
+                                  cat["name"],
+                                  cat["subline"],
+                                  cat["image"],
+                                ),
+                              )
+                              .take(5)
+                              .toList(),
+                    ),
+                    Column(
+                      spacing: 8,
+                      children:
+                          catData
+                              .sublist(5, 10)
+                              .map(
+                                (cat) => categorybox(
+                                  context,
+                                  cat["name"],
+                                  cat["subline"],
+                                  cat["image"],
+                                ),
+                              )
+                              .take(5)
+                              .toList(),
+                    ),
+                  ],
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
 
@@ -122,34 +158,162 @@ class Categories extends StatelessWidget {
   }
 }
 
-
-Widget categorybox(String? catName, String? subLine, String? imgPath){
-  return Container(
-    width: 160,
-    height: 110,
-    padding: EdgeInsets.fromLTRB(13, 14, 10, 5),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(10)
+Widget categorybox(
+  BuildContext context,
+  String? catName,
+  String? subLine,
+  String? imgPath,
+) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CategoryPage(catName: catName,)),
+      );
+    },
+    child: Container(
+      width: 170,
+      height: 110,
+      padding: EdgeInsets.fromLTRB(13, 14, 10, 5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                catName!,
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  color: Colors.green.shade900,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                subLine!,
+                style: GoogleFonts.poppins(
+                  color: Colors.grey,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          Spacer(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Image(image: AssetImage(imgPath!), width: 50, height: 70),
+            ],
+          ),
+        ],
+      ),
     ),
-    child: Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(catName!, style: GoogleFonts.poppins(fontSize: 14, color: Colors.green.shade900, fontWeight: FontWeight.w600),),
-            Text(subLine!, style: GoogleFonts.poppins(color: Colors.grey, fontSize: 9, fontWeight: FontWeight.w600),)
-          ],
+  );
+}
+
+class CategoryPage extends StatelessWidget {
+  final String catName;
+  const CategoryPage({super.key, required this.catName});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        title: Text(
+          "Shop",
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 17),
         ),
-        Spacer(),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Image(image: AssetImage(imgPath!), width: 50, height: 70,)
-          ],
-        )
-      ],
+        leading: IconButton(
+          icon: Icon(Icons.chevron_left),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.grey.shade100,
+      ),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 30),
+        children: [
+          Text(
+            catName,
+            style: GoogleFonts.poppins(
+              fontSize: 28,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(height: 10),
+          StaggeredGrid.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            children: catpros[catName]!.map((item) => categoryProCont(item["image"] as String, item["name"] as String, item["quantity"] as String, item["price"] as int)).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget categoryProCont(String? img, String? name, String? quantity, int price) {
+  return Expanded(
+    child: Container(
+      height: 230,
+    
+      padding: EdgeInsets.only(bottom: 18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.elliptical(60, 20),
+          bottomRight: Radius.elliptical(60, 20),
+        ),
+        boxShadow: [BoxShadow(color: Colors.black12, offset: Offset(0, 1))],
+      ),
+    
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image(
+            image: AssetImage(img!),
+            height: 130,
+          ),
+          SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Center(
+              child: Text(
+                name!,
+                maxLines: 1,
+                overflow: TextOverflow.fade,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colors.green.shade900,
+                ),
+              ),
+            ),
+          ),
+          Text(
+            quantity!,
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              fontSize: 11,
+              color: Colors.grey,
+            ),
+          ),
+          Spacer(),
+          Text(
+            "₹$price",
+            style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        ],
+      ),
     ),
   );
 }
