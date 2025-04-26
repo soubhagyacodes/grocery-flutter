@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/utils/home_categories.dart';
+
+import '../categories.dart';
 
 class HomeCategory extends StatelessWidget {
    final Map<String, dynamic> category;
@@ -14,7 +17,7 @@ class HomeCategory extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-               print("clicked");
+               Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(catName: category["text"])),);
             },
             child: SizedBox(
               height: 50,

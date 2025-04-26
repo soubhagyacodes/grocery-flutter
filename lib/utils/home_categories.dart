@@ -3,7 +3,7 @@ final categories = ["Vegetables", "Dairy", "Bakery", "Staples", "Snacks", "Bever
 final homeCategories = [
   {
     "image": "images/vegetable.png",
-    "text": "Veggies",
+    "text": "Vegetables",
   },
   {
     "image": "images/milk.png",

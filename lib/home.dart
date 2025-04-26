@@ -287,10 +287,12 @@ class _ProductDetails extends State<ProductDetails>{
                         for (var cartItem in cart) {
                           if(cartItem["item"] == widget.product["name"]){
                             cartItem["quantity"] += counter;
+                            Navigator.pop(context);
                             return;
                           }
                         }
                         cart.add({"quantity":counter , "item" : widget.product["name"], "description" : widget.product["description"], "image": widget.product["image"], "price" : widget.product["price"]});
+                        Navigator.pop(context);
                       },
                       child: Container(
                         width: 20,
