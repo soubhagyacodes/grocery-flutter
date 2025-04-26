@@ -39,6 +39,7 @@ class Cart extends StatelessWidget {
                   ),
                 ) 
                 : Container(
+                  width: double.infinity,
                   padding: EdgeInsets.all(10),
                   child: Column(
                     spacing: 20,
@@ -86,6 +87,37 @@ class Cart extends StatelessWidget {
                           ],
                         ),
                       ),
+                      InkWell(
+                        onTap: (){
+                          cart.clear();
+                          showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Payment Successful!', style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+          content: Text('Your order has been placed successfully.', style: GoogleFonts.poppins()),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK', style: GoogleFonts.poppins(color: Colors.green)),
+            ),
+          ],
+        );}
+        
+        );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                          ),
+                          child: Center(child: Text("Pay ₹${total + 50}", style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),)),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -94,12 +126,6 @@ class Cart extends StatelessWidget {
 
             ],
           ),
-          floatingActionButton: IconButton(
-            onPressed:() {
-            }, 
-            tooltip:'Back', 
-            icon: Icon(Icons.arrow_back)
-            ),
           );
   }
 }

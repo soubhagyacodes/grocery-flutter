@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/cart.dart';
 import 'package:grocery_app/utils/home_categories.dart';
 import 'package:grocery_app/utils/discounts.dart';
 import 'package:grocery_app/utils/main_home_data.dart';
 import 'package:grocery_app/utils/cart_items.dart';
+import 'package:grocery_app/widgets/empty_page.dart';
 import 'styles.dart';
 import 'package:grocery_app/widgets/home_category.dart';
 import 'package:grocery_app/widgets/discount_box.dart';
@@ -33,7 +35,8 @@ final bubbleData = [
 ];
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final Function onCartPressed;
+  const Home({super.key, required this.onCartPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +57,9 @@ class Home extends StatelessWidget {
             ),
 
             Row(
-              spacing: 14,
               children: [
-                Icon(Icons.notifications_none, size: 22, weight: 200),
-                Icon(Icons.shopping_cart_outlined, size: 22, weight: 200),
+                IconButton(icon: Icon(Icons.notifications_none, size: 22), onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => EmptyPage(title: "Notifications",)));},),
+                IconButton(icon: Icon(Icons.shopping_cart_outlined, size: 22), onPressed: (){onCartPressed();},),
               ],
             ),
           ],

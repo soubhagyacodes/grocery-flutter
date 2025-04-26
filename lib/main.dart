@@ -23,22 +23,33 @@ class Base extends StatefulWidget {
 }
 
 class _BaseState extends State<Base> {
-  int _currentIndex = 0;
+  int currentIndex = 0;
+
+
+  @override
+  Widget build(BuildContext context) {
 
   final List<Widget> _pages = [
-    Home(),
-    Categories(),
+    Home(onCartPressed: () {
+        setState(() {
+          currentIndex = 2;
+        });
+      }),
+    Categories(onCartPressed: () {
+        setState(() {
+          currentIndex = 2;
+        });
+      }),
     Cart(),
     Profile(),
   ];
 
-  @override
-  Widget build(BuildContext context) {
+
     return Scaffold(
 
-      body: _pages[_currentIndex],
+      body: _pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: currentIndex,
         selectedItemColor: Colors.green,
         type: BottomNavigationBarType.fixed,
         iconSize: 26,
@@ -46,7 +57,7 @@ class _BaseState extends State<Base> {
 
         onTap: (int index) {
           setState(() {
-            _currentIndex = index;
+            currentIndex = index;
           });
         },
 

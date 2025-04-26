@@ -5,7 +5,8 @@ import 'package:grocery_app/utils/category/all_cats.dart';
 import 'package:grocery_app/utils/category/cat_products.dart';
 
 class Categories extends StatelessWidget {
-  const Categories({super.key});
+  final Function onCartPressed;
+  const Categories({super.key, required this.onCartPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -71,21 +72,24 @@ class Categories extends StatelessWidget {
                       ),
                     ),
 
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      width: 40,
-                      height: 40,
-                      padding: EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200, // Background color
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25),
-                        ), // Rounded corners
-                      ),
-                      child: Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.black54,
-                        size: 21,
+                    InkWell(
+                      onTap: (){onCartPressed();},
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        width: 40,
+                        height: 40,
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200, // Background color
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(25),
+                          ), // Rounded corners
+                        ),
+                        child: Icon(
+                          Icons.shopping_cart_outlined,
+                          color: Colors.black54,
+                          size: 21,
+                        ),
                       ),
                     ),
                   ],
